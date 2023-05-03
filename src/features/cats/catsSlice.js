@@ -3,17 +3,22 @@ const initialState = {
   status: "idle",
 };
 
+// ACTION CREATOR
 export function fetchCats() {
   return function(dispatch) {
     dispatch({ type: "cats/catsLoading"});
     fetch("https://learn-co-curriculum.github.io/cat-api/cats.json")
       .then((r) => r.json())
       .then((cats) => {
-        dispatch({ type: "cats/catsLoaded", payload: cats.images });
+        dispatch({ 
+          type: "cats/catsLoaded", 
+          payload: cats.images 
+        });
       });
   }
 };
 
+// CATS REDUCER
 export default function catsReducer(state = initialState, action) {
   switch(action.type) {
     case "cats/catsLoading":
